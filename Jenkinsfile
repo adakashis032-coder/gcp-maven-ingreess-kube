@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "your-dockerhub-user/gcp-maven-ingress-kube:${env.BUILD_NUMBER}"
+        DOCKER_IMAGE = "adakashis032/gcp-maven-ingress-kube:${env.BUILD_NUMBER}"
     }
 
     tools {
