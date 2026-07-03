@@ -32,6 +32,9 @@ pipeline {
 
         stage('Docker Build & Push') {
             steps {
+                sh 'ls -l'
+                sh 'docker -v'
+                sh 'which docker'
                 withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     sh "docker build -t $DOCKER_IMAGE ."
                     sh "docker login -u $USER -p $PASS"
