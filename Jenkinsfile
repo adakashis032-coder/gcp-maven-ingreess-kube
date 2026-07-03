@@ -43,7 +43,7 @@ pipeline {
                     sh "echo $PASS | docker login -u $USER --password-stdin || { echo '❌ Docker login failed'; exit 1; }"
 
                     sh "echo 'Building image: $DOCKER_IMAGE'"
-                    sh "docker build -t $DOCKER_IMAGE . || { echo '❌ Docker build failed'; exit 1; }"
+                    sh "docker build -t $DOCKER_IMAGE . || { echo '❌ Docker build failed'; exit 2; }"
 
                     sh "echo 'Pushing image: $DOCKER_IMAGE'"
                     sh "docker push $DOCKER_IMAGE || { echo '❌ Docker push failed'; exit 1; }"
