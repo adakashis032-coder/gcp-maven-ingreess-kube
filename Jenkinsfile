@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven-3.8.1'
-        jdk 'JDK-11'
-    }
-
     environment {
         DOCKER_IMAGE = "your-dockerhub-user/gcp-maven-ingress-kube:${env.BUILD_NUMBER}"
     }
@@ -44,15 +39,6 @@ pipeline {
                 withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                     sh "kubectl --kubeconfig=$KUBECONFIG set image deployment/gcp-maven-ingress-kube gcp-maven-ingress-kube=$DOCKER_IMAGE --record"
                     sh "kubectl --kubeconfig=$KUBECONFIG rollout status deployment/gcp-maven-ingress-kube --timeout=60s"
-                }
-            }
-        }
-
-        stage('Monitor Pod Health') {
-            steps {
-                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                    sh "kubectl --kubeconfig=$KUBECONFIG get pods -l app=gcp-maven-ingress-kube"
-                    sh "kubectl --kubeconfig=$KUBECONFIG describe pods -l app=gcp-maven-ingress-kube"
                 }
             }
         }
