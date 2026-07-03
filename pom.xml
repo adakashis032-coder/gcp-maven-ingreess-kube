@@ -1,0 +1,15 @@
+stage('Build') {
+    steps {
+        dir('gcp-maven-ingress-kube') {
+            sh 'mvn clean install'
+        }
+    }
+}
+
+stage('Test') {
+    steps {
+        dir('gcp-maven-ingress-kube') {
+            sh 'mvn test'
+        }
+    }
+}
