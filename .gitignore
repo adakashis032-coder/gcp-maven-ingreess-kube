@@ -2,7 +2,7 @@
 ._*
 .DS_Store
 
-# intellij files
+# IntelliJ files
 .idea/*
 
 # Eclipse files
@@ -10,7 +10,7 @@
 .project
 .settings/**
 
-# visual studio code
+# Visual Studio Code
 .vscode/*
 
 # Emacs save files
@@ -25,39 +25,54 @@
 Session.vim
 .netrwhist
 
-# mkdocs
+# MkDocs
 site
 
-# temporal github pages
+# Temporal GitHub Pages
 gh-pages
 
 # Docker-based builds
 test/binaries
 
-# coverage artifacts
+# Coverage artifacts
 .coverprofile
 gover.coverprofile
-
-e2e-tests
 coverage.txt
-test/e2e/e2e\.test
-.env
-.gocache/
-bin
-test/e2e-image/wait-for-nginx.sh
-.cache
-.modcache
 cover.out
 
-# secret terraform variables
+# Go cache
+.gocache/
+.modcache
+.cache
+
+# Test artifacts
+e2e-tests
+test/e2e/e2e.test
+test/e2e-image/wait-for-nginx.sh
+test/junitreports/
+tests/__snapshot__
+
+# Environment files
+.env
+
+# Binaries
+bin
+
+# Secret terraform variables
 build/images/nginx/aws.tfvars
 build/images/nginx/env.tfvars
 
+# Images
 images/fastcgi-helloserver/rootfs/fastcgi-helloserver
 
+# Plugin release artifacts
 cmd/plugin/release/ingress-nginx.yaml
 cmd/plugin/release/*.tar.gz
 cmd/plugin/release/LICENSE
+
+# Temporary files
 tmp/
-test/junitreports/
-tests/__snapshot__
+
+# Maven build output
+target/
+
