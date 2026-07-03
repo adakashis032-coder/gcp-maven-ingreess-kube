@@ -41,4 +41,30 @@ pipeline {
                     sh "echo 'Building image: $DOCKER_IMAGE'"
                     sh "docker build -t $DOCKER_IMAGE ./docker || { echo '❌ Docker build failed'; exit 1; }"
                     sh "echo 'Pushing image: $DOCKER_IMAGE'"
-                    sh "docker push
+                    sh "docker push $DOCKER_IMAGE || { echo '❌ Docker push failed'; exit 1; }"
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                    sh "kubectl --kubeconfig=$KUBECONFIG set image deployment/gcp-maven-ingress-kube gcp-maven-ingress-kube=$DOCKER_IMAGE --record"
+                    sh "kubectl --kubeconfig=$KUBECONFIG rollout status deployment/gcp-maven-ingress-kube --timeout=60s"
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Build, push, and deploy succeeded!'
+        }
+        failure {
+            echo '❌ Deployment failed. Rolling back...'
+            withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                sh "kubectl --kubeconfig=$KUBECONFIG rollout undo deployment/gcp-maven-ingress-kube"
+            }
+        }
+    }
+}
