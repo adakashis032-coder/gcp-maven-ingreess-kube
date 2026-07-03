@@ -36,8 +36,11 @@ pipeline {
                 sh 'docker -v'
                 sh 'which docker'
                 withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                    sh "docker build -t $DOCKER_IMAGE ."
+                    sh "echo 'Logging in to Docker Hub as $USER'"
                     sh "docker login -u $USER -p $PASS"
+                    sh "echo 'Building image: $DOCKER_IMAGE'"
+                    sh "docker build -t $DOCKER_IMAGE ."
+                    sh "echo 'Pushing image: $DOCKER_IMAGE'"
                     sh "docker push $DOCKER_IMAGE"
                 }
             }
