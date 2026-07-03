@@ -39,7 +39,7 @@ pipeline {
                     sh "echo 'Logging in to Docker Hub as $USER'"
                     sh "docker login -u $USER -p $PASS"
                     sh "echo 'Building image: $DOCKER_IMAGE'"
-                    sh "docker build -t $DOCKER_IMAGE ."
+                    sh "docker build -t $DOCKER_IMAGE ./docker"
                     sh "echo 'Pushing image: $DOCKER_IMAGE'"
                     sh "docker push $DOCKER_IMAGE"
                 }
