@@ -5,12 +5,13 @@ pipeline {
         DOCKER_IMAGE = "your-dockerhub-user/gcp-maven-ingress-kube:${env.BUILD_NUMBER}"
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/adakashis032-coder/gcp-maven-ingress-kube.git'
-            }
-        }
+   stage('Checkout') {
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/adakashis032-coder/gcp-maven-ingress-kube.git',
+            credentialsId: 'github-pat'
+    }
+}
 
         stage('Build') {
             steps {
