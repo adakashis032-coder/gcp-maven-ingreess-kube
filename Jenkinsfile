@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/adakashis032-coder/gcp-maven-ingress-kube.git',
+                    url: 'https://github.com/adakashis032-coder/gcp-maven-ingress-kube',
                     credentialsId: '085c5197-0276-4de3-b806-90c1f60d8935'
             }
         }
