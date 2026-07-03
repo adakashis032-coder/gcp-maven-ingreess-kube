@@ -1,15 +1,21 @@
-stage('Build') {
-    steps {
-        dir('gcp-maven-ingress-kube') {
-            sh 'mvn clean install'
-        }
-    }
-}
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-stage('Test') {
-    steps {
-        dir('gcp-maven-ingress-kube') {
-            sh 'mvn test'
-        }
-    }
-}
+    <groupId>com.adakashis032</groupId>
+    <artifactId>gcp-maven-ingress-kube</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- Add your project dependencies here -->
+    </dependencies>
+
+</project>
