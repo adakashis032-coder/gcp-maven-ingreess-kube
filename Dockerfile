@@ -6,7 +6,7 @@ WORKDIR /app
 COPY pom.xml .
 
 # Copy source code (adjust path if nested)
-COPY src ./src
+COPY . .
 
 # Build the JAR
 RUN mvn clean package -DskipTests
