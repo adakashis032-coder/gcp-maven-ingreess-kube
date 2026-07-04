@@ -46,7 +46,7 @@ pipeline {
                     sh "docker build -t $DOCKER_IMAGE . || { echo '❌ Docker build failed'; exit 2; }"
 
                     sh "echo 'Pushing image: $DOCKER_IMAGE'"
-                    sh "docker push $DOCKER_IMAGE || { echo '❌ Docker push failed'; exit 1; }"
+                    sh "docker push $DOCKER_IMAGE || { echo '❌ Docker push failed tumse ho na payega'; exit 1; }"
                 }
             }
         }
